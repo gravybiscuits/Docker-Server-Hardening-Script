@@ -33,6 +33,7 @@ Enables the firewall.
 
 
 Intrusion Detection (Fail2Ban):
+
 Installs Fail2Ban, a tool to block malicious IP addresses trying to breach the system.
 Enables and starts the Fail2Ban service.
 
