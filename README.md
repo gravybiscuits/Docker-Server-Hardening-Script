@@ -1,15 +1,22 @@
 # hardenyourdock
 In summary, this script provides an automated way to harden server security settings, install Docker and some common containers, and check the Docker setup against security benchmarks.
 
-tl:dr
+## tl:dr ##
 
-Script:
+#Script:
 UFW --> Fail2Ban --> Docker --> Trivy --> Ngnix Container --> MySQL Container --> Redis Container --> Docker Security Bench
 
+###
+
 1st: mkdir name-your-directory
+
 2nd: nano hardenyourdock.sh
+
 3rd: chmod +x hardenyourdock.sh
+
 4th: ./hardenyourdock.sh
+
+###
 
 
 Here's a breakdown of what the script does, step by step:
