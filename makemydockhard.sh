@@ -2,8 +2,6 @@
 
 echo "Starting comprehensive Server Hardening and Docker Setup script..."
 
-## STEP 1: Docker, Docker Compose, Trivy, Docker Bench Installation
-
 # Ensure the script exits on any command failure
 set -e
 
@@ -15,22 +13,24 @@ fi
 
 echo "Starting server hardening process..."
 
-# 1. Update and upgrade all packages
+# Configuration input
+read -p "Enter the SSH port you'd like to use (default is 22): " SSH_PORT
+SSH_PORT=${SSH_PORT:-22}
+
+# Update and upgrade all packages
 echo "Updating and upgrading packages..."
 apt update && apt upgrade -y
 apt autoremove -y
 
-# 2. Install and configure firewall (UFW)
+# Set up the firewall
 echo "Setting up the firewall..."
 apt install ufw -y
 ufw default deny incoming
 ufw default allow outgoing
-ufw allow ssh
-# If you want to change the SSH port, change it in the sshd_config file and then allow that port using ufw
-# For example, for port 2222: ufw allow 2222/tcp
+ufw allow $SSH_PORT
 ufw enable
 
-# 3. Install and enable intrusion detection (Fail2Ban)
+# Install and enable intrusion detection (Fail2Ban)
 echo "Installing and configuring Fail2Ban..."
 apt install fail2ban -y
 systemctl enable fail2ban
@@ -58,7 +58,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 # Install Trivy for vulnerability scanning
 curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
-## STEP 2: Docker Networking and Containers
+## Docker Networking and Containers
 
 echo "Starting Docker networking setup script..."
 
@@ -70,6 +70,33 @@ if [ -z "$(docker network ls | grep ${NETWORK_NAME})" ]; then
     docker network create ${NETWORK_NAME}
 else
     echo "Network ${NETWORK_NAME} already exists."
+fi
+
+## Docker Networking and Containers
+
+echo "Starting Docker networking setup script..."
+
+# Configuration input for Docker containers
+read -p "Do you want to run the Nginx container? (y/n): " RUN_NGINX
+read -p "Do you want to run the MySQL container? (y/n): " RUN_MYSQL
+read -p "Do you want to run the Redis container? (y/n): " RUN_REDIS
+
+# If user wants to run Nginx, ask for version
+if [ "$RUN_NGINX" = "y" ]; then
+    read -p "Enter Nginx version (default is latest): " NGINX_VERSION
+    NGINX_VERSION=${NGINX_VERSION:-latest}
+fi
+
+# If user wants to run MySQL, ask for version
+if [ "$RUN_MYSQL" = "y" ]; then
+    read -p "Enter MySQL version (default is 5.7): " MYSQL_VERSION
+    MYSQL_VERSION=${MYSQL_VERSION:-5.7}
+fi
+
+# If user wants to run Redis, ask for version
+if [ "$RUN_REDIS" = "y" ]; then
+    read -p "Enter Redis version (default is latest): " REDIS_VERSION
+    REDIS_VERSION=${REDIS_VERSION:-latest}
 fi
 
 # Image versions
