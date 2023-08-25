@@ -12,7 +12,8 @@ Here's a breakdown of what the script does, step by step:
 Prerequisite Checks:
 
 Ensures the script will exit if any command fails (set -e).
-Checks if the script is being run as the root user. If not, it prints a message asking the user to run the script as root and exits.
+Checks if the script is being run as the root user. 
+If not, it prints a message asking the user to run the script as root and exits.
 
 
 Server Hardening/Package Management:
@@ -59,29 +60,34 @@ Installs Trivy, a vulnerability scanner for Docker images.
 Docker Networking and Containers Setup:
 
 Introduces the Docker networking setup process.
-Checks if a custom Docker bridge network (custom_bridge_network) exists. If not, it creates one.
+Checks if a custom Docker bridge network (custom_bridge_network) exists. 
+If not, it creates one.
 
 
 Nginx Container:
 
-Checks if an Nginx container named nginx_server exists. If not, it pulls the latest Nginx image and runs a container on the custom network, binding to port 80.
+Checks if an Nginx container named nginx_server exists. 
+If not, it pulls the latest Nginx image and runs a container on the custom network, binding to port 80.
 
 
 MySQL Container:
 
 Prompts the user to enter a password for the MySQL root user.
-Checks if a MySQL container named mysql_db exists. If not, it pulls the MySQL image (version 5.7) and runs a container on the custom network using the entered password for the root user.
+Checks if a MySQL container named mysql_db exists. 
+If not, it pulls the MySQL image (version 5.7) and runs a container on the custom network using the entered password for the root user.
 
 
 Redis Container:
 
-Checks if a Redis container named redis_cache exists. If not, it pulls the latest Redis image and runs a container on the custom network.
+Checks if a Redis container named redis_cache exists. 
+If not, it pulls the latest Redis image and runs a container on the custom network.
 Prints the IP addresses of the Nginx, MySQL, and Redis containers within the Docker network.
 
 
 Docker Security Benchmarking:
 
-Clones the docker-bench-security repository from GitHub. This tool checks for common best-practices around deploying Docker containers in production.
+Clones the docker-bench-security repository from GitHub. 
+This tool checks for common best-practices around deploying Docker containers in production.
 Runs the Docker Bench Security script to assess the Docker setup's security.
 
 
