@@ -18,13 +18,18 @@ Server Hardening/Package Management:
 Updates the package list (apt update).
 Upgrades all packages to their latest versions (apt upgrade).
 Removes unnecessary packages (apt autoremove).
+
+
 Firewall Setup (UFW):
+
 Installs the UFW (Uncomplicated Firewall) package.
 Denies all incoming traffic by default.
 Allows all outgoing traffic by default.
 Explicitly allows incoming SSH traffic (port 22 by default).
 There's a commented section indicating how to adjust for a custom SSH port.
 Enables the firewall.
+
+
 Intrusion Detection (Fail2Ban):
 Installs Fail2Ban, a tool to block malicious IP addresses trying to breach the system.
 Enables and starts the Fail2Ban service.
