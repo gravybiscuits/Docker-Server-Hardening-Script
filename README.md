@@ -1,4 +1,4 @@
-# hardenmydock
+# hardenyourdock
 In summary, this script provides an automated way to harden server security settings, install Docker and some common containers, and check the Docker setup against security benchmarks.
 
 tl:dr
