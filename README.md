@@ -6,6 +6,11 @@ tl:dr
 Script:
 UFW --> Fail2Ban --> Docker --> Trivy --> Ngnix Container --> MySQL Container --> Redis Container --> Docker Security Bench
 
+1st: mkdir name-your-directory
+2nd: nano hardenyourdock.sh
+3rd: chmod +x hardenyourdock.sh
+4th: ./hardenyourdock.sh
+
 
 Here's a breakdown of what the script does, step by step:
 
